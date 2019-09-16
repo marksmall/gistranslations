@@ -1,0 +1,37 @@
+version: "3.5"
+
+services:
+  db:
+    image: kartoza/postgis:11.0-2.5
+    environment:
+      POSTGRES_DBNAME: gistranslations_db
+      POSTGRES_USER: gistranslations_user
+      POSTGRES_PASS: gistranslations_password
+      ALLOW_IP_RANGE: 0.0.0.0/0
+    ports:
+      - "5666:5432"
+    networks:
+      - gistranslations
+
+  server:
+    build:
+      context: .
+    tty: true
+    environment:
+      - DJANGO_SETTINGS_MODULE=translate.settings
+      - PIPENV_NOSPIN=1
+    command: >
+      -c "cd /opt/deployments/gistranslations/ && pipenv install --dev --system"
+      -c "until echo > /dev/tcp/db/5432; do sleep 1; done"
+      -m "migrate --noinput"
+      -m "runserver 0.0.0.0:8000"
+    volumes:
+      - .:/opt/deployments/gistranslations
+    ports:
+      - "8000:8000"
+    networks:
+      - gistranslations
+
+networks:
+  gistranslations:
+    driver: bridge
