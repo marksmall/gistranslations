@@ -28,6 +28,8 @@ django-filter = ">=2.1.0"
 pandas = ">=0.25.0"
 # GIS data processing
 geopandas = ">=0.5.1"
+# Support ESRI Shapefile format
+pyshp = ">=2.1.0"
 
 [dev-packages]
 # coverage reports for GitHub, GitLab, etc.

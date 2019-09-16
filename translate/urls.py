@@ -16,9 +16,10 @@ Including another URLconf
 from django.urls import path
 from django.contrib import admin
 
-from .views_api import translate_view
+from .views_api import translate_view, TranslateView
 
 urlpatterns = [
-    path('api/translate/', translate_view, name='translate'),
+    path('api/translate/', TranslateView.as_view(), name='translate'),
+    # path('api/translate/', translate_view, name='translate'),
     path('admin/', admin.site.urls),
 ]
