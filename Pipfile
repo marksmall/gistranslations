@@ -15,7 +15,7 @@ psycopg2-binary = ">=2.8.3"
 # access environment variables
 django-environ = ">=0.4.5"
 # API... duh
-djangorestframework = "==3.9.4"
+djangorestframework = "==3.11.2"
 # API for GIS
 djangorestframework-gis = ">=0.14.0"
 # API documentation
